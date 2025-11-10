@@ -1,0 +1,117 @@
+{% extends 'auth_base.html' %}
+{% load static %}
+{% block title %}
+  Login | FitNexus
+{% endblock %}
+{% block content %}
+  <section class="py-lg-5 py-4">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-6">
+          <div class="codex-authbox px-lg-5">
+            <div class="codex-brand mb-lg-5 mb-4">
+              <a class="d-flex align-items-center justify-content-center" href="#">
+                <img class="img-fluid" src="{% static 'assets/images/logo/logo.png' %}" alt="theme-logo" />
+                <span class="fs-3 align-middle ms-2 lh-1">FitNexus</span>
+              </a>
+            </div>
+            <h3>Welcome Back 👋</h3>
+            <p class="mb-lg-4 mb-2">Train smart. Eat right. Feel great. Sign in to stay on track.</p>
+
+            <form method="post">
+              {% csrf_token %}
+              <div class="row gy-4">
+                <div class="col-md-12">
+                  <label class="form-label">Username</label>
+                  <input type="text" name="username" class="form-control" placeholder="Enter your username" required />
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label">Password</label>
+                  <div class="input-group">
+                    <input type="password" name="password" class="form-control" placeholder="At least 8 characters" required />
+                    <span class="input-group-text"><i class="ti ti-eye"></i></span>
+                  </div>
+                  <a href="#" class="float-end mt-3 d-inline-block text-primary">Forgot Password?</a>
+                </div>
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-primary w-100 py-3">Sign in</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="login-aur text-center py-4">
+              <span class="bg-white">Or</span>
+            </div>
+
+            <div class="text-center mt-4">
+              Don’t have an account?
+              <a href="{% url 'users:register' %}" class="text-primary">Sign up</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 d-none d-lg-block">
+          <img src="{% static 'assets/images/welcome.png' %}" alt="" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    $(document).ready(function () {
+      jQuery.validator.addMethod(
+        'regex',
+        function (value, element, regexp) {
+          var re = new RegExp(regexp)
+          return this.optional(element) || re.test(value)
+        },
+        'Invalid format.'
+      )
+    
+      $('form').validate({
+        rules: {
+          username: {
+            required: true,
+            minlength: 3,
+            maxlength: 30
+          },
+          password: {
+            required: true,
+            minlength: 8
+          }
+        },
+        messages: {
+          username: {
+            required: 'Please enter your username',
+            minlength: 'Username must be at least 3 characters',
+            maxlength: 'Username cannot exceed 30 characters'
+          },
+          password: {
+            required: 'Please enter your password',
+            minlength: 'Password must be at least 8 characters long'
+          }
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+          error.addClass('text-danger mt-1')
+          element.closest('.col-md-12').append(error)
+        },
+        highlight: function (element) {
+          $(element).addClass('is-invalid')
+        },
+        unhighlight: function (element) {
+          $(element).removeClass('is-invalid')
+        }
+      })
+    
+      // Toggle password visibility
+      $('.input-group-text').on('click', function () {
+        const input = $(this).siblings('input')
+        const icon = $(this).find('i')
+        const type = input.attr('type') === 'password' ? 'text' : 'password'
+        input.attr('type', type)
+        icon.toggleClass('ti-eye ti-eye-off')
+      })
+    })
+  </script>
+{% endblock %}

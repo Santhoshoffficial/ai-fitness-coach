@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FitNexus is a modern, responsive fitness and gym admin dashboard template built with Bootstrap 5. Perfect for fitness apps, gym management, and health tracking.">
+  <meta name="keywords" content="FitNexus, fitness admin template, gym dashboard, workout tracker, health app UI, bootstrap 5 admin, responsive admin template, gym management">
+  <meta name="author" content="CodExperts">
+  <title>{% block title %}FitNexus – Fitness & Gym Admin{% endblock %}</title>
+
+  <link rel="icon" href="{% static 'assets/images/logo/logo.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'assets/images/logo/logo.png' %}" type="image/x-icon">
+
+  <!-- Vendor CSS -->
+  <link href="{% static 'assets/css/vendor/font-awesome.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/vendor/tabler-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/vendor/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/vendor/animate.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/vendor/simplebar.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/vendor/bootstrap.css' %}" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+  <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/vendors/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/vendors/notify/bootstrap-notify.js' %}"></script>
+  <script src="{% static 'assets/js/vendors/notify/bootstrap-customnotify.js' %}"></script>
+</head>
+
+<body class="bg-white">
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

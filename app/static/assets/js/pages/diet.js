@@ -1,0 +1,2 @@
+!function(){"use strict";function s(s,e,i){$(s).slick({infinite:!0,slidesToShow:e,slidesToScroll:1,speed:300,autoplay:!0,autoplaySpeed:2e3,responsive:i})}s(".testimonial-slider",4,[{breakpoint:1441,settings:{slidesToShow:3}},{breakpoint:992,settings:{slidesToShow:2}},{breakpoint:768,settings:{slidesToShow:1}}]),s(".popularworkout-slider",2,[{breakpoint:1441,settings:{slidesToShow:3}},{breakpoint:768,settings:{slidesToShow:2}},{breakpoint:481,settings:{slidesToShow:1}}])}();
+//# sourceMappingURL=diet.js.map

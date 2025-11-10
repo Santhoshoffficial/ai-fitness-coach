@@ -1,0 +1,13 @@
+# Core
+Django
+psycopg2-binary
+pandas
+numpy
+
+# Environment / Deployment
+python-dotenv
+gunicorn
+
+# Testing
+pytest-django
+django-cors-headers
