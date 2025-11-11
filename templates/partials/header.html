@@ -1,0 +1,90 @@
+{% load static %}
+<!-- Header Start -->
+<header class="codex-header">
+  <div class="header-contian d-flex justify-content-between align-items-center">
+    <div class="header-left d-flex align-items-center">
+      <div class="codex-brand me-3">
+        <div class="sidebar-action navicon-wrap d-xl-none me-3">
+          <i class="ti ti-layout-grid"></i>
+        </div>
+        <a class="d-flex align-items-center" href="{% url 'users:profile' %}">
+          <img class="img-fluid" src="{% static 'assets/images/logo/logo.png' %}" alt="theme-logo" />
+          <span class="fs-3 align-middle ms-2">Sansora</span>
+        </a>
+      </div>
+      <div class="sidebar-action navicon-wrap d-xl-none me-3">
+        <i class="ti ti-layout-grid"></i>
+      </div>
+      <div class="input-group">
+        <span class="input-group-text pe-0"><i class="ti ti-search"></i></span>
+        <input type="text" placeholder="Search Here" class="form-control" />
+      </div>
+    </div>
+    <div class="header-right d-flex align-items-center justify-content-end">
+      <ul class="nav-iconlist">
+        <!-- Dark Mode -->
+        <li>
+          <div class="navicon-wrap action-dark">
+            <i class="ti ti-moon icon-dark"></i>
+          </div>
+        </li>
+        <!-- Notifications -->
+        <li class="action-menu dropdown">
+          <div class="navicon-wrap notiicon-iconwrap" data-bs-toggle="dropdown">
+            <i class="ti ti-bell-ringing"></i>
+            <div class="noti-count"></div>
+          </div>
+          <div class="navnotification-drop action-dropdown dropdown-menu">
+            <div class="drop-header">
+              <h5>notification<span class="float-end">05</span></h5>
+            </div>
+            <div data-simplebar>
+              <ul>
+                <!-- Notification items here -->
+              </ul>
+            </div>
+            <div class="drop-footer">
+              <a href="javascript:void(0)">See All Notification</a>
+            </div>
+          </div>
+        </li>
+        <!-- Settings -->
+        <li class="action-menu dropdown">
+          <div class="navicon-wrap" data-bs-target="#customizer" data-bs-toggle="offcanvas">
+            <i class="ti ti-settings"></i>
+          </div>
+        </li>
+        <!-- User Profile -->
+        <li class="nav-profile action-menu dropdown">
+          <div class="user-icon action-toggle" data-bs-toggle="dropdown">
+            <img class="img-fluid" src="{% static 'assets/images/avtar/profile.png' %}" alt="User Logo" />
+          </div>
+          <div class="navprofile-drop action-dropdown dropdown-menu">
+            <ul>
+              <li>
+                <div class="media-body">
+                  <!-- Default avatar if you don't have a profile image field -->
+                  <img class="img-fluid rounded-circle" src="{% static 'assets/images/avtar/profile.png' %}" alt="User Logo" />
+                  <h6 class="mt-2 fw-bold">Hello {{ request.user.first_name|default:request.user.username }}</h6>
+                  {% if request.user.age %}
+                    <small>Age: {{ request.user.age }}</small>
+                  {% endif %}
+                  {% if request.user.gender %}
+                    <small>| Gender: {{ request.user.gender }}</small>
+                  {% endif %}
+                </div>
+              </li>
+              <li>
+                <a href="{% url 'users:profile' %}"><i class="me-2 align-middle ti ti-settings"></i>Settings</a>
+              </li>
+              <li>
+                <a href="{% url 'users:logout' %}"><i class="me-2 align-middle ti ti-logout"></i>Log out</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Header End -->

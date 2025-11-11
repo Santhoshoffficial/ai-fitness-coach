@@ -1,9 +1,138 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Profile | Sansora
+{% endblock %}
+
 {% block content %}
-<h2>Your Profile</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
+  <div class="row">
+    <!-- Profile Card -->
+    <div class="col-xxl-6 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-3">
+            <div class="img-wrap border rounded-2 px-3 pt-2">
+              <img src="{% if request.user.profile_image %}
+                  {{ request.user.profile_image.url }}
+                {% else %}
+                  {% static 'assets/images/avtar/profile-img.jpg' %}
+                {% endif %}"
+                alt="Profile"
+                class="img-fluid rounded-circle"
+                style="width:100px; height:100px;" />
+            </div>
+            <div>
+              <h4 class="fw-bold mb-2">{{ request.user.get_full_name|default:request.user.username }}</h4>
+              <a href="{% url 'users:profile' %}" class="btn btn-primary">Track Progress</a>
+            </div>
+          </div>
+
+          <ul class="equipment-list gap-3 my-4">
+            <li>
+              <a href="{% url 'users:profile' %}">
+                <img src="{% static 'assets/images/workout/fire.svg' %}" alt="" class="img-fluid" />
+                {{ request.user.weight_kg|default:'-' }} kg
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'users:profile' %}">
+                <img src="{% static 'assets/images/workout/clock.svg' %}" alt="" class="img-fluid" />
+                {{ request.user.height_cm|default:'-' }} cm
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'users:profile' %}">
+                <img src="{% static 'assets/images/workout/power.svg' %}" alt="" class="img-fluid" />
+                {% if request.user.date_of_birth %}
+                  {{ request.user.date_of_birth|date:'d M Y' }}
+                {% else %}
+                  -
+                {% endif %}
+              </a>
+            </li>
+          </ul>
+
+          <table class="table mt-3 mb-4">
+            <tbody>
+              <tr>
+                <td class="fs-6 fw-semibold py-3 align-middle">Name</td>
+                <td class="text-end align-middle">{{ request.user.get_full_name|default:request.user.username }}</td>
+              </tr>
+              <tr>
+                <td class="fs-6 fw-semibold py-3 align-middle">Gender</td>
+                <td class="text-end align-middle">{{ request.user.gender|default:'-' }}</td>
+              </tr>
+              <tr>
+                <td class="fs-6 fw-semibold py-3 align-middle">Date of birth</td>
+                <td class="text-end align-middle">
+                  {% if request.user.date_of_birth %}
+                    {{ request.user.date_of_birth|date:'d M Y' }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td class="fs-6 fw-semibold py-3 align-middle">Height</td>
+                <td class="text-end align-middle">{{ request.user.height_cm|default:'-' }} cm</td>
+              </tr>
+              <tr>
+                <td class="fs-6 fw-semibold py-3 align-middle">Weight</td>
+                <td class="text-end align-middle">{{ request.user.weight_kg|default:'-' }} kg</td>
+              </tr>
+              <tr>
+                <td class="fs-6 fw-semibold py-3 align-middle">Goal</td>
+                <td class="text-end align-middle">{{ request.user.goal|default:'-' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Card -->
+    <div class="col-xxl-6 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="fw-bold mb-3">Account</h4>
+          <table class="table">
+            <tbody>
+              <tr data-bs-toggle="modal" data-bs-target="#workoutreminder">
+                <td class="fs-6 fw-semibold py-3 align-middle">Account</td>
+                <td class="text-end align-middle">
+                  <i class="ti ti-chevron-right ms-2"></i>
+                </td>
+              </tr>
+              <tr data-bs-toggle="modal" data-bs-target="#workoutreminder">
+                <td class="fs-6 fw-semibold py-3 align-middle">My Workouts</td>
+                <td class="text-end align-middle">
+                  <i class="ti ti-chevron-right ms-2"></i>
+                </td>
+              </tr>
+              <tr data-bs-toggle="modal" data-bs-target="#workoutreminder">
+                <td class="fs-6 fw-semibold py-3 align-middle">Workout reminders</td>
+                <td class="text-end align-middle">
+                  <i class="ti ti-chevron-right ms-2"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="{% url 'users:logout' %}" class="btn btn-primary mt-3">Log out</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="fw-bold mb-3">Weight Tracking</h4>
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <span class="font-light fs-6">Current</span>
+              <h6 class="fw-bold">{{ request.user.weight_kg|default:'-' }} kg</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -1,24 +1,71 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AI Fitness Coach</title>
-</head>
-<body>
-    <nav>
-        <a href="{% url 'users:profile' %}">Profile</a> |
-        <a href="{% url 'users:login' %}">Login</a> |
-        <a href="{% url 'users:register' %}">Register</a> |
-        <a href="{% url 'users:logout' %}">Logout</a>
-    </nav>
-    <hr>
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% block content %}{% endblock %}
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="FitNexus is a modern, responsive fitness and gym admin dashboard template built with Bootstrap 5." />
+    <meta name="keywords" content="FitNexus, fitness admin template, gym dashboard, workout tracker, health app UI, bootstrap 5 admin, responsive admin template, gym management" />
+    <meta name="author" content="CodExperts" />
+    <title>
+      {% block title %}
+        FitNexus
+      {% endblock %}
+    </title>
+
+    <link rel="icon" href="{% static 'assets/images/logo/logo.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/datepicker/jquery-ui.css' %}" />
+    <link href="{% static 'assets/css/vendor/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/vendor/tabler-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/vendor/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/vendor/animate.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/vendor/simplebar.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/vendor/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    {% block extra_head %}
+
+    {% endblock %}
+  </head>
+
+  <body>
+    <!-- Loader Start -->
+    <div class="codex-loader">
+      <img src="{% static 'assets/images/loader.gif' %}" alt="" class="img-fluid" />
+    </div>
+    <!-- Loader End -->
+
+    <!-- Header -->
+    {% include 'partials/header.html' %}
+    <!-- Sidebar -->
+    {% include 'partials/sidebar.html' %}
+
+    <main class="themebody-wrap">
+      <div class="theme-body">
+        <div class="container-fluid">
+          {% block content %}
+
+          {% endblock %}
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/vendors/modernizr.min.js' %}"></script>
+    <script src="{% static 'assets/js/app-config.js' %}"></script>
+    <script src="{% static 'assets/js/customizer.js' %}"></script>
+    <script src="{% static 'assets/js/vendors/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendors/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/icons/feather.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+    <script src="{% static 'assets/js/vendors/datepicker/jquery-ui.js' %}"></script>
+
+    {% block extra_js %}
+
+    {% endblock %}
+  </body>
 </html>

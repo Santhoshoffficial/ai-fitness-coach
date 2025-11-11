@@ -1,0 +1,46 @@
+{% load static %}
+<!-- Sidebar Start -->
+<aside class="codex-sidebar">
+  <div class="codex-brand">
+    <a class="d-flex align-items-center" href="{% url 'users:profile' %}">
+      <img class="img-fluid" src="{% static 'assets/images/logo/logo.png' %}" alt="theme-logo" />
+      <span class="fs-3 align-middle ms-2 lh-1">Sansora</span>
+    </a>
+    <div class="sidebar-action">
+      <i class="ti ti-chevron-left"></i>
+    </div>
+  </div>
+  <span class="menu-preve"><i class="ti ti-chevron-left"></i></span>
+  <div class="codex-menuwrapper custom-scroll" data-simplebar>
+    <ul class="codex-menu">
+      <li class="menu-item">
+        <a href="{% url 'users:profile' %}">
+          <div class="icon-item">
+            <i class="ti ti-layout-dashboard"></i>
+          </div>
+          <span>Overview</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{% url 'users:profile' %}">
+          <div class="icon-item">
+            <i class="ti ti-barbell"></i>
+          </div>
+          <span>Workout</span>
+          <i class="fa fa-angle-right menu-dropwdown"></i>
+        </a>
+        <ul class="submenu-list">
+          <li>
+            <a href="#">Workout Filter</a>
+          </li>
+          <li>
+            <a href="#">Workout Top Filter</a>
+          </li>
+        </ul>
+      </li>
+      <!-- More menu items -->
+    </ul>
+  </div>
+  <span class="menu-next"><i class="ti ti-chevron-right"></i></span>
+</aside>
+<!-- Sidebar End -->
