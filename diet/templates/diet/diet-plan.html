@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Diet Plan | Sansora{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xxl-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center gy-4">
+          <!-- Search Bar -->
+          <div class="col-md-6">
+            <form method="get" class="input-group">
+              <span class="input-group-text pe-0"><i class="ti ti-search"></i></span>
+              <input type="text" name="search" value="{{ request.GET.search }}" placeholder="Search for menu" class="form-control" />
+            </form>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="col-md-6">
+            <div class="d-flex justify-content-end align-items-center gap-3">
+              <form method="get">
+                <select name="category" class="form-select w-50" onchange="this.form.submit()">
+                  <option {% if not request.GET.category or request.GET.category == 'All' %}selected{% endif %}>All</option>
+                  <option {% if request.GET.category == 'Breakfast' %}selected{% endif %}>Breakfast</option>
+                  <option {% if request.GET.category == 'Lunch' %}selected{% endif %}>Lunch</option>
+                  <option {% if request.GET.category == 'Snack' %}selected{% endif %}>Snack</option>
+                  <option {% if request.GET.category == 'Dinner' %}selected{% endif %}>Dinner</option>
+                </select>
+              </form>
+              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adddiatmenu">Add Menu</a>
+            </div>
+          </div>
+
+          <!-- Diet Menus -->
+          {% for diet in diets %}
+          <div class="col-md-12 col-sm-6">
+            <div class="dite-grid">
+              <div class="img-wrap">
+                <a href="{% url 'diet:diet_detail' diet.id %}">
+                  {% if diet.image %}
+                    <img src="{{ diet.image.url }}" alt="" class="img-fluid" />
+                  {% else %}
+                    <img src="{% static 'assets/images/placeholder.jpg' %}" alt="" class="img-fluid" />
+                  {% endif %}
+                </a>
+              </div>
+
+              <div class="dite-detail">
+                <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-4">
+                  <span class="badge bg-primary">{{ diet.meal_type }}</span>
+                  <div class="d-flex flex-nowrap gap-1">
+                    <span class="badge bg-light text-dark"><i class="ti ti-star me-2"></i>{{ diet.rating }}/5</span>
+                    <span class="badge bg-light text-dark"><i class="ti ti-heart me-2"></i>{{ diet.health_score }}/100</span>
+                  </div>
+                </div>
+
+                <a href="{% url 'diet:diet_detail' diet.id %}">
+                  <h3 class="mb-2 fw-bold">{{ diet.name }}</h3>
+                </a>
+                <p class="mb-3">{{ diet.description }}</p>
+              </div>
+
+              <div class="food-vitamin">
+                <ul class="vitamin-list">
+                  <li><i class="ti ti-droplet-half-2 me-2"></i>{{ diet.calories }} Cal</li>
+                  <li><i class="ti ti-bookmarks me-2"></i>{{ diet.carbs }} Carbs</li>
+                  <li><i class="ti ti-fish me-2"></i>{{ diet.protein }} Protein</li>
+                  <li><i class="ti ti-droplet me-2"></i>{{ diet.fats }} Fats</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="text-center mt-5">
+            <h5>No diet plans found.</h5>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
